@@ -3,67 +3,43 @@ import { render, screen } from '@testing-library/react'
 import { axe, toHaveNoViolations } from 'jest-axe'
 import Header from '../../src/components/header'
 
-// Extend Jest matchers
 expect.extend(toHaveNoViolations)
 
-// Mock next/navigation
-jest.mock('next/navigation', () => ({
-  usePathname: jest.fn(() => '/'),
-}))
-
-// Mock framer-motion to avoid animation issues in tests
-jest.mock('framer-motion', () => ({
-  motion: {
-    div: ({ children, ...props }: React.PropsWithChildren<Record<string, unknown>>) => (
-      <div {...props}>{children}</div>
-    ),
-    nav: ({ children, ...props }: React.PropsWithChildren<Record<string, unknown>>) => (
-      <nav {...props}>{children}</nav>
-    ),
-  },
-  AnimatePresence: ({ children }: React.PropsWithChildren) => <>{children}</>,
-}))
-
-describe('Header component', () => {
-  it('should render the header', () => {
+describe('Armstrong Aces Header', () => {
+  it('renders the header banner', () => {
     render(<Header />)
     expect(screen.getByRole('banner')).toBeInTheDocument()
   })
 
-  it('should display the Free For Charity logo', () => {
+  it('exposes an accessible home link', () => {
     render(<Header />)
-    // Check for logo image with alt text
-    expect(screen.getByAltText('Free For Charity')).toBeInTheDocument()
+    expect(screen.getByRole('link', { name: 'Armstrong Aces Baseball home' })).toBeInTheDocument()
   })
 
-  it('should display Home navigation link', () => {
+  it('renders the primary nav with About and Sponsors entries', () => {
     render(<Header />)
-    // Home link should always be present in navigation
-    expect(screen.getByText('Home')).toBeInTheDocument()
+    expect(screen.getByText('About')).toBeInTheDocument()
+    expect(screen.getByText('Sponsors')).toBeInTheDocument()
   })
 
-  it('should have navigation links', () => {
+  it('preserves the Givebutter donate URL', () => {
     render(<Header />)
-    // Check that navigation has at least some links
-    const links = screen.getAllByRole('link')
-    expect(links.length).toBeGreaterThan(0)
+    const donate = screen.getAllByText('Donate')
+    expect(donate.length).toBeGreaterThan(0)
+    const donateLink = donate[0].closest('a')
+    expect(donateLink).toHaveAttribute('href', 'https://givebutter.com/acesbaseball')
+    expect(donateLink).toHaveAttribute('target', '_blank')
+    expect(donateLink).toHaveAttribute('rel', expect.stringContaining('noopener'))
   })
 
-  it('should have a mobile menu button', () => {
+  it('preserves the Team Shop URL', () => {
     render(<Header />)
-    // Look for the menu icon button
-    const buttons = screen.getAllByRole('button')
-    expect(buttons.length).toBeGreaterThan(0)
+    const shop = screen.getAllByText('Team Shop')
+    const shopLink = shop[0].closest('a')
+    expect(shopLink).toHaveAttribute('href', 'https://armstrongacesbaseball.org/shop/')
   })
 
-  it('should have search functionality button', () => {
-    render(<Header />)
-    const buttons = screen.getAllByRole('button')
-    // Should have at least menu and search buttons
-    expect(buttons.length).toBeGreaterThanOrEqual(2)
-  })
-
-  it('should not have accessibility violations', async () => {
+  it('has no accessibility violations', async () => {
     const { container } = render(<Header />)
     const results = await axe(container)
     expect(results).toHaveNoViolations()
