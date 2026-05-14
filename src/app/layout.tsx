@@ -2,8 +2,6 @@ import type { Metadata } from 'next'
 import './globals.css'
 import Header from './../components/header'
 import Footer from './../components/footer'
-import CookieConsent from './../components/cookie-consent'
-import GoogleTagManager, { GoogleTagManagerNoScript } from './../components/google-tag-manager'
 import {
   openSans,
   lato,
@@ -19,21 +17,20 @@ import {
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH || ''
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://ffcworkingsite1.org'),
+  metadataBase: new URL('https://armstrongacesbaseball.org'),
   title: {
-    default: 'Free For Charity | Reduce Costs, Increase Impact',
-    template: '%s | Free For Charity',
+    default: 'Armstrong Aces Baseball | Goodyear, AZ 13U Youth Baseball',
+    template: '%s | Armstrong Aces Baseball',
   },
   description:
-    'Free For Charity connects students, professionals, and businesses with nonprofits to reduce costs and increase revenues—putting more resources back into their missions.',
+    'Armstrong Aces Baseball is a 501(c)(3) youth baseball club in Goodyear, Arizona. We turn coaches into mentors and players into Aces — fierce, unstoppable, and driven.',
   keywords: [
-    'nonprofit',
-    'charity',
-    'volunteer',
-    'donate',
-    'free hosting',
-    'domains',
-    'Microsoft 365',
+    'Armstrong Aces',
+    'youth baseball',
+    'Goodyear AZ baseball',
+    '13U baseball',
+    'Arizona youth sports',
+    'baseball nonprofit',
   ],
   robots: {
     index: true,
@@ -51,26 +48,23 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: 'website',
-    url: 'https://ffcworkingsite1.org/',
-    siteName: 'Free For Charity',
-    title: 'Free For Charity | Reduce Costs, Increase Impact',
-    description:
-      'Connecting students, professionals, and businesses with nonprofits to reduce costs and increase revenues.',
+    url: 'https://armstrongacesbaseball.org/',
+    siteName: 'Armstrong Aces Baseball',
+    title: 'Armstrong Aces Baseball | Goodyear, AZ 13U Youth Baseball',
+    description: 'Top youth baseball in Goodyear, AZ. Coaches into mentors, players into Aces.',
     images: [
       {
         url: '/web-app-manifest-512x512.png',
         width: 512,
         height: 512,
-        alt: 'Free For Charity',
+        alt: 'Armstrong Aces Baseball',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    site: '@freeforcharity',
-    title: 'Free For Charity | Reduce Costs, Increase Impact',
-    description:
-      'Connecting students, professionals, and businesses with nonprofits to reduce costs and increase revenues.',
+    title: 'Armstrong Aces Baseball | Goodyear, AZ',
+    description: 'Top youth baseball in Goodyear, AZ. Unleash your inner ace.',
     images: ['/web-app-manifest-512x512.png'],
   },
   icons: {
@@ -82,6 +76,7 @@ export const metadata: Metadata = {
   },
   manifest: `${basePath}/site.webmanifest`,
 }
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -90,25 +85,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        {/* Preconnect to external domains for faster resource loading */}
-        <link rel="preconnect" href="https://www.googletagmanager.com" />
-        <link rel="preconnect" href="https://ffcsites.org" />
-        <link rel="preconnect" href="https://www.zeffy.com" />
-        <link rel="preconnect" href="https://widgets.guidestar.org" />
-        <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
-        <link rel="dns-prefetch" href="https://ffcsites.org" />
-        <link rel="dns-prefetch" href="https://www.zeffy.com" />
-        <link rel="dns-prefetch" href="https://www.idealist.org" />
-
-        {/* Preload critical LCP image */}
-        <link
-          rel="preload"
-          as="image"
-          href={`${basePath}/Images/figma-hero-img.webp`}
-          fetchPriority="high"
-        />
-
-        <GoogleTagManager />
+        <link rel="preconnect" href="https://givebutter.com" />
+        <link rel="preconnect" href="https://www.youtube-nocookie.com" />
+        <link rel="dns-prefetch" href="https://i.ytimg.com" />
       </head>
       <body
         className={[
@@ -124,14 +103,9 @@ export default function RootLayout({
         ].join(' ')}
         suppressHydrationWarning={true}
       >
-        <GoogleTagManagerNoScript />
-        {/* <PopupProvider> */}
         <Header />
         {children}
         <Footer />
-        <CookieConsent />
-        {/* <PopupsRootClient /> */}
-        {/* </PopupProvider> */}
       </body>
     </html>
   )

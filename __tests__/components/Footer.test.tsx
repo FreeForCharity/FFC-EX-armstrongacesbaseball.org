@@ -3,59 +3,44 @@ import { render, screen } from '@testing-library/react'
 import { axe, toHaveNoViolations } from 'jest-axe'
 import Footer from '../../src/components/footer'
 
-// Extend Jest matchers
 expect.extend(toHaveNoViolations)
 
-describe('Footer component', () => {
-  it('should render the footer', () => {
+describe('Armstrong Aces Footer', () => {
+  it('renders a contentinfo landmark', () => {
     render(<Footer />)
-    const footer = screen.getByRole('contentinfo')
-    expect(footer).toBeInTheDocument()
+    expect(screen.getByRole('contentinfo')).toBeInTheDocument()
   })
 
-  it('should display Endorsements section', () => {
+  it('shows the organization brand block', () => {
     render(<Footer />)
-    expect(screen.getByText('Endorsements')).toBeInTheDocument()
+    expect(screen.getByText('Armstrong Aces Baseball')).toBeInTheDocument()
   })
 
-  it('should display Quick Links section', () => {
+  it('displays the current year in the copyright bar', () => {
     render(<Footer />)
-    expect(screen.getByText('Quick Links')).toBeInTheDocument()
+    const year = new Date().getFullYear().toString()
+    expect(screen.getByText(new RegExp(year))).toBeInTheDocument()
   })
 
-  it('should display Contact Us section with contact information', () => {
+  it('exposes the email contact', () => {
     render(<Footer />)
-    expect(screen.getByText('Contact Us')).toBeInTheDocument()
-  })
-
-  it('should have social media links', () => {
-    render(<Footer />)
-    // Check for social media links by their aria-labels or visible text
     const links = screen.getAllByRole('link')
-    expect(links.length).toBeGreaterThan(0)
+    const email = links.find((l) =>
+      l.getAttribute('href')?.includes('mailto:info@armstrongacesbaseball.org')
+    )
+    expect(email).toBeDefined()
   })
 
-  it('should display the current year in copyright', () => {
+  it('exposes the Facebook social link', () => {
     render(<Footer />)
-    const currentYear = new Date().getFullYear()
-    expect(screen.getByText(new RegExp(currentYear.toString()))).toBeInTheDocument()
+    const fb = screen.getByLabelText('Facebook')
+    expect(fb).toHaveAttribute(
+      'href',
+      'https://www.facebook.com/people/Armstrong-Aces/100090681325027/'
+    )
   })
 
-  it('should have GuideStar profile link', () => {
-    render(<Footer />)
-    const guidestarLink = screen.getByText(/GuideStar Profile/i)
-    expect(guidestarLink).toBeInTheDocument()
-  })
-
-  it('should have email contact link', () => {
-    render(<Footer />)
-    // Look for email link
-    const links = screen.getAllByRole('link')
-    const emailLink = links.find((link) => link.getAttribute('href')?.includes('mailto:'))
-    expect(emailLink).toBeDefined()
-  })
-
-  it('should not have accessibility violations', async () => {
+  it('has no accessibility violations', async () => {
     const { container } = render(<Footer />)
     const results = await axe(container)
     expect(results).toHaveNoViolations()
