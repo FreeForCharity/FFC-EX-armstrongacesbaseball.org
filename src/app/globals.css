@@ -101,6 +101,18 @@ body {
   padding-inline: 16px;
 }
 
+/* Diagonal grid overlay used in the hero emblem card */
+.aa-grid-overlay {
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(255, 255, 255, 0.5) 0,
+    rgba(255, 255, 255, 0.5) 1px,
+    transparent 0,
+    transparent 50%
+  );
+  background-size: 18px 18px;
+}
+
 /* Diamond pattern stitching accent used in hero */
 .aa-stitch-divider {
   background-image: repeating-linear-gradient(

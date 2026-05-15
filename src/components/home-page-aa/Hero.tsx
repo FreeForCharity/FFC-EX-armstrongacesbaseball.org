@@ -54,23 +54,33 @@ const Hero: React.FC = () => {
             </div>
           </div>
 
-          {/* Hero diamond emblem */}
+          {/* Hero emblem card */}
           <div className="md:col-span-5 flex justify-center md:justify-end">
-            <div className="relative">
-              <div
-                className="aspect-square w-[260px] md:w-[360px] rotate-45 rounded-2xl border-4 border-[var(--aa-red)] bg-gradient-to-br from-[var(--aa-navy-deep)] to-[var(--aa-navy)] shadow-2xl"
-                aria-hidden="true"
-              />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-center">
-                  <p className="text-[var(--aa-red)] font-black text-7xl md:text-9xl leading-none drop-shadow-lg">
-                    AA
-                  </p>
-                  <p className="mt-2 text-[var(--aa-cream)] uppercase tracking-[0.4em] text-xs md:text-sm">
-                    Aces Baseball
-                  </p>
-                </div>
+            <div
+              className="relative w-[260px] md:w-[320px] rounded-2xl overflow-hidden shadow-2xl border border-[var(--aa-red)]/30"
+              aria-hidden="true"
+            >
+              {/* Background with baseball diamond pattern */}
+              <div className="absolute inset-0 bg-gradient-to-br from-[var(--aa-navy-deep)] via-[var(--aa-navy)] to-[#0a1428]" />
+              {/* Decorative diamond field lines */}
+              <div className="absolute inset-0 opacity-[0.07] aa-grid-overlay" aria-hidden="true" />
+              {/* Red accent bar at top */}
+              <div className="relative z-10 h-2 bg-[var(--aa-red)]" />
+              {/* Emblem content */}
+              <div className="relative z-10 flex flex-col items-center justify-center py-12 px-8">
+                <p className="text-[var(--aa-red)] font-black text-[6rem] md:text-[7rem] leading-none drop-shadow-lg tracking-tighter">
+                  AA
+                </p>
+                <div className="mt-3 w-16 h-0.5 bg-[var(--aa-red)]" />
+                <p className="mt-3 text-[var(--aa-cream)] uppercase tracking-[0.35em] text-xs font-bold">
+                  Aces Baseball
+                </p>
+                <p className="mt-1 text-[var(--aa-cream)]/60 uppercase tracking-[0.2em] text-[0.65rem]">
+                  Goodyear, AZ · 13U
+                </p>
               </div>
+              {/* Red accent bar at bottom */}
+              <div className="relative z-10 h-2 bg-[var(--aa-red)]" />
             </div>
           </div>
         </div>
