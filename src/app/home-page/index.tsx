@@ -7,7 +7,7 @@ import Contact from '@/components/home-page-aa/Contact'
 
 const HomePage: React.FC = () => {
   return (
-    <main>
+    <main id="main">
       <Hero />
       <About />
       <DonateCTA />
