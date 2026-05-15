@@ -28,18 +28,29 @@ const Sponsors: React.FC = () => {
           </p>
         </div>
 
-        <ul className="grid grid-cols-2 md:grid-cols-4 gap-6" aria-label="Sponsor logos">
+        {/* Horizontal sponsor name bar — intentional no-logo treatment */}
+        <div className="flex flex-wrap justify-center gap-3 md:gap-4" aria-label="Sponsor logos">
           {sponsors.map((s) => (
-            <li
+            <div
               key={s.name}
-              className="flex items-center justify-center min-h-[120px] rounded-xl border-2 border-[var(--aa-sand)] bg-[var(--aa-cream)]/60 hover:border-[var(--aa-red)] transition-colors p-6"
+              className="inline-flex items-center px-5 py-3 rounded-full bg-[var(--aa-navy)] hover:bg-[var(--aa-red)] transition-colors group"
             >
-              <span className="text-center font-bold text-[var(--aa-navy)] text-lg leading-tight">
+              <span className="text-[var(--aa-cream)] font-black uppercase tracking-[0.15em] text-sm group-hover:text-white transition-colors whitespace-nowrap">
                 {s.name}
               </span>
-            </li>
+            </div>
           ))}
-        </ul>
+        </div>
+
+        <p className="text-center mt-8 text-sm text-[var(--aa-muted)]">
+          Interested in sponsoring the Aces?{' '}
+          <a
+            href="mailto:info@armstrongacesbaseball.org"
+            className="text-[var(--aa-red)] font-semibold hover:underline"
+          >
+            Get in touch
+          </a>
+        </p>
       </div>
     </section>
   )
