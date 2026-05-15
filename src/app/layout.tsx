@@ -54,9 +54,9 @@ export const metadata: Metadata = {
     description: 'Top youth baseball in Goodyear, AZ. Coaches into mentors, players into Aces.',
     images: [
       {
-        url: '/web-app-manifest-512x512.png',
-        width: 512,
-        height: 512,
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
         alt: 'Armstrong Aces Baseball',
       },
     ],
@@ -65,7 +65,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Armstrong Aces Baseball | Goodyear, AZ',
     description: 'Top youth baseball in Goodyear, AZ. Unleash your inner ace.',
-    images: ['/web-app-manifest-512x512.png'],
+    images: ['/og-image.png'],
   },
   icons: {
     icon: [
