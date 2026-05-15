@@ -85,9 +85,9 @@ const Header: React.FC = () => {
                   {menuItems.map((item, index) => {
                     const isExternal = item.external
                     const cls =
-                      'px-3 py-2 text-[14px] font-semibold transition-colors duration-200 text-[var(--aa-cream)] hover:text-white'
+                      'px-3 py-2 text-[14px] font-semibold transition-colors duration-200 text-[var(--aa-cream)] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--aa-red)] rounded'
                     const ctaCls =
-                      'ml-2 px-4 py-2 text-[14px] font-bold uppercase tracking-wide bg-[var(--aa-red)] hover:bg-[var(--aa-red-deep)] text-white rounded transition-colors duration-200'
+                      'ml-2 px-4 py-2 text-[14px] font-bold uppercase tracking-wide bg-[var(--aa-red)] hover:bg-[var(--aa-red-deep)] text-white rounded transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[var(--aa-navy)]'
                     const useCta = item.label === 'Donate' || item.label === 'Team Shop'
 
                     return (
@@ -116,7 +116,7 @@ const Header: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                className="lg:hidden p-2 text-[var(--aa-cream)] hover:text-white"
+                className="lg:hidden p-2 text-[var(--aa-cream)] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--aa-red)] rounded"
                 aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
                 aria-expanded={isMobileMenuOpen ? 'true' : 'false'}
               >
@@ -148,7 +148,7 @@ const Header: React.FC = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       onClick={handleLinkClick}
-                      className="block px-4 py-3 rounded-lg text-sm font-semibold text-[var(--aa-cream)] hover:bg-[var(--aa-navy)] hover:text-white"
+                      className="block px-4 py-3 rounded-lg text-sm font-semibold text-[var(--aa-cream)] hover:bg-[var(--aa-navy)] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--aa-red)]"
                     >
                       {item.label}
                     </a>
@@ -156,7 +156,7 @@ const Header: React.FC = () => {
                     <Link
                       href={item.path}
                       onClick={handleLinkClick}
-                      className="block px-4 py-3 rounded-lg text-sm font-semibold text-[var(--aa-cream)] hover:bg-[var(--aa-navy)] hover:text-white"
+                      className="block px-4 py-3 rounded-lg text-sm font-semibold text-[var(--aa-cream)] hover:bg-[var(--aa-navy)] hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[var(--aa-red)]"
                     >
                       {item.label}
                     </Link>
