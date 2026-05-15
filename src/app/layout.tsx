@@ -1,4 +1,10 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  themeColor: '#0b2545',
+}
 import './globals.css'
 import Header from './../components/header'
 import Footer from './../components/footer'
