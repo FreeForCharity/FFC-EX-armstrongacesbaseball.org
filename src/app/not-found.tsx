@@ -10,9 +10,7 @@ export default function NotFound() {
   return (
     <main className="min-h-[60vh] flex items-center justify-center px-6 py-20">
       <div className="text-center max-w-md">
-        <p className="text-sm font-semibold uppercase tracking-widest text-[var(--aa-red)]">
-          404
-        </p>
+        <p className="text-sm font-semibold uppercase tracking-widest text-[var(--aa-red)]">404</p>
         <h1 className="mt-3 text-3xl md:text-4xl font-bold text-[var(--aa-navy)]">
           We couldn&apos;t find that page.
         </h1>
