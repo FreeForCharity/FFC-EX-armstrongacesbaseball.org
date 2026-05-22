@@ -46,6 +46,7 @@ const YouTubeEmbed: React.FC<YouTubeEmbedProps> = ({ videoId, title }) => {
           AA
         </span>
       </div>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src={`https://i.ytimg.com/vi/${videoId}/maxresdefault.jpg`}
         alt=""
