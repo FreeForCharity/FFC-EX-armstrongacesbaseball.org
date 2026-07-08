@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 
 export const metadata: Metadata = {
   title: 'Privacy Policy',
@@ -55,9 +56,9 @@ export default function PrivacyPolicy() {
               cookies. Aside from analytics, your browser may store a small amount of information
               used by the site itself (for example, remembering your cookie choice), but that
               information stays in your browser. For details, see our{' '}
-              <a href="/cookie-policy" className="text-[var(--aa-red)] underline">
+              <Link href="/cookie-policy" className="text-[var(--aa-red)] underline">
                 Cookie Policy
-              </a>
+              </Link>
               .
             </p>
 

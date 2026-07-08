@@ -51,12 +51,29 @@ function readStoredConsent(): string | null {
     // localStorage unavailable — fall through to the cookie
   }
   if (typeof document === 'undefined') return null
-  const entry = document.cookie.split('; ').find((c) => c.startsWith('cookie-consent='))
+  // Cookies are separated by ';' with optional whitespace — split on ';' then trim,
+  // so parsing works even when there is no space after the separator.
+  const entry = document.cookie
+    .split(';')
+    .map((c) => c.trim())
+    .find((c) => c.startsWith('cookie-consent='))
   if (!entry) return null
   try {
     return decodeURIComponent(entry.slice('cookie-consent='.length))
   } catch {
     return null
+  }
+}
+
+// Remove a corrupted/invalid stored consent so it stops re-triggering the banner path.
+function clearStoredConsent() {
+  try {
+    localStorage.removeItem('cookie-consent')
+  } catch {
+    // ignore — localStorage may be unavailable
+  }
+  if (typeof document !== 'undefined') {
+    document.cookie = 'cookie-consent=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;'
   }
 }
 
@@ -66,7 +83,10 @@ export default function CookieConsent() {
   const [preferences, setPreferences] = useState<CookiePreferences>({
     necessary: true, // Always true, cannot be changed
     functional: true, // Always true, cannot be changed (remembers site preferences, e.g. your cookie choices)
-    analytics: false,
+    // Opt-out model: analytics is ON by default. It only becomes false when the visitor
+    // explicitly declines, so the Customize modal reflects the real running state and a
+    // no-op "Save" does not silently opt the visitor out.
+    analytics: true,
   })
   const [savedPreferencesBackup, setSavedPreferencesBackup] =
     useState<CookiePreferences>(preferences)
@@ -131,6 +151,8 @@ export default function CookieConsent() {
         try {
           savedPreferences = JSON.parse(consent)
         } catch {
+          // Corrupted value — clear it so we don't hit this path every load.
+          clearStoredConsent()
           if (showBannerIfMissing) setShowBanner(true)
           return
         }
@@ -153,7 +175,8 @@ export default function CookieConsent() {
           setSavedPreferencesBackup(updatedPreferences)
           applyConsent(updatedPreferences)
         } else {
-          // Invalid data, show banner again
+          // Valid JSON but wrong shape — clear it and show the banner again.
+          clearStoredConsent()
           if (showBannerIfMissing) setShowBanner(true)
         }
       } catch {
@@ -383,7 +406,7 @@ export default function CookieConsent() {
                     type="checkbox"
                     checked={preferences.analytics}
                     onChange={(e) =>
-                      setPreferences({ ...preferences, analytics: e.target.checked })
+                      setPreferences((prev) => ({ ...prev, analytics: e.target.checked }))
                     }
                     className="sr-only peer"
                     aria-label="Enable analytics cookies"
