@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from 'next'
 import './globals.css'
 import Header from './../components/header'
 import Footer from './../components/footer'
+import GoogleTagManager, { GoogleTagManagerNoScript } from '@/components/google-tag-manager'
+import CookieConsent from '@/components/cookie-consent'
 import {
   openSans,
   lato,
@@ -91,6 +93,7 @@ export default function RootLayout({
         <link rel="preconnect" href="https://givebutter.com" />
         <link rel="preconnect" href="https://www.youtube-nocookie.com" />
         <link rel="dns-prefetch" href="https://i.ytimg.com" />
+        <GoogleTagManager />
       </head>
       <body
         className={[
@@ -106,6 +109,7 @@ export default function RootLayout({
         ].join(' ')}
         suppressHydrationWarning={true}
       >
+        <GoogleTagManagerNoScript />
         <a
           href="#main"
           className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:rounded focus:bg-white focus:px-4 focus:py-2 focus:text-black focus:shadow-lg"
@@ -115,6 +119,7 @@ export default function RootLayout({
         <Header />
         {children}
         <Footer />
+        <CookieConsent />
       </body>
     </html>
   )
