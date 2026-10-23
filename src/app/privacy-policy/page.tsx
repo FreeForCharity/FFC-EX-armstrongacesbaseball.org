@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import Link from 'next/link'
 
 export const metadata: Metadata = {
   title: 'Privacy Policy',
@@ -32,9 +33,33 @@ export default function PrivacyPolicy() {
               Information We Collect
             </h2>
             <p>
-              Our website is a static informational site. We do not collect personal information
-              through this site directly. When you donate or shop with us, you do so on third-party
-              platforms (Givebutter, Team Shop) that have their own privacy policies.
+              Our website is a static informational site. We do not run accounts, comments, or
+              contact forms, and we do not knowingly collect personal information you type in. When
+              you donate or shop with us, you do so on third-party platforms (Givebutter, Team Shop)
+              that have their own privacy policies. The one exception is the aggregate analytics
+              described below, which you can decline at any time.
+            </p>
+
+            <h2 className="text-2xl font-bold text-[var(--aa-navy)] mt-8">Analytics</h2>
+            <p>
+              To understand how this site is used in aggregate — for example, which pages are
+              visited most often — we use Google Tag Manager and Google Analytics 4 (GA4). This
+              helps us maintain and improve the site. We do not use this information to identify
+              individual visitors, and we do not sell it.
+            </p>
+
+            <h2 className="text-2xl font-bold text-[var(--aa-navy)] mt-8">Cookies</h2>
+            <p>
+              Analytics runs by default, so Google Analytics 4 sets a first-party analytics cookie
+              (such as <code>_ga</code>) when you visit. You can decline analytics at any time using
+              the cookie banner: declining stops analytics on this browser and deletes those
+              cookies. Aside from analytics, your browser may store a small amount of information
+              used by the site itself (for example, remembering your cookie choice), but that
+              information stays in your browser. For details, see our{' '}
+              <Link href="/cookie-policy" className="text-[var(--aa-red)] underline">
+                Cookie Policy
+              </Link>
+              .
             </p>
 
             <h2 className="text-2xl font-bold text-[var(--aa-navy)] mt-8">Third-Party Services</h2>
